@@ -9,9 +9,9 @@ function EditAvatarProfilePopup({ isOpen, onClose }) {
             isOpen={isOpen}
             onClose={onClose}
         >
-            <input required name="avatar" type="url" id="avatarLink" class="form__input"
+            <input required name="avatar" type="url" id="avatarLink" className="form__input"
                 placeholder="Ссылка на картинку" />
-            <span class="form__input-error" id="avatarLink-error"></span>
+            <span className="form__input-error" id="avatarLink-error"></span>
         </PopupWithForm>
 
     )

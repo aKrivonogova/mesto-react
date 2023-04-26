@@ -9,8 +9,8 @@ function AddPlacePopup({ isOpen, onClose }) {
             isOpen={isOpen}
             onClose={onClose}
         >
-            <input name="name" type="text" id="cardName" class="form__input" placeholder="Название" required
-                minlength="2" maxlength="30" />
+            <input name="name" type="text" id="cardName" className="form__input" placeholder="Название" required
+                minLength={"2"} maxLength={"30"} />
             <span className="form__input-error" id="cardName-error"></span>
             <input required name="link" type="url" id="cardImageSrc" className="form__input"
                 placeholder="Ссылка на картинку" />
