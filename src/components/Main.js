@@ -21,7 +21,7 @@ function Main({ handleEditAvatarClick, handleAddPlaceClick, handleEditProfileCli
         setCards(res)
       })
       .catch((error) => console.log(error))
-  })
+  },[])
 
   return (
     <main className="main">
