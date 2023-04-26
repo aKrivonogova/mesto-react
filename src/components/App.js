@@ -6,7 +6,7 @@ import EditAvatarProfilePopup from './EditAvatarProfilePopup';
 import AddPlacePopup from './AddPlacePopup'
 import EditProfilePopup from './EditProfilePopup';
 import { useState } from 'react';
-import PopupWithImage from './PopupWithImage'
+import ImagePopup from './ImagePopup'
 function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isEditAvatarProfileOpen, setEditAvatarProfileOpen] = useState(false);
@@ -54,7 +54,7 @@ function App() {
           onClose={closeAllPopups}
         />
 
-        <PopupWithImage
+        <ImagePopup
           card={selectedCard}
           onClose={closeAllPopups}
         />
