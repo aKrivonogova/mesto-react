@@ -3,6 +3,14 @@ import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarProfilePopup({ isOpen, onClose, onUpdateAvatar }) {
     const avatarRef = useRef('');
+    function resetForm() {
+        avatarRef.current.value = null;
+    }
+
+    useEffect(() => {
+        resetForm();
+    }, [isOpen])
+
     function handleSubmit(event) {
         event.preventDefault();
         onUpdateAvatar({ avatar: avatarRef.current.value })

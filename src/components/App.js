@@ -61,8 +61,9 @@ function App() {
 
     api.changeLikeCardStatus(card._id, isLiked)
       .then((res) => {
-        const newCards = cards.map(cardIten => cardIten._id === card._id ? res : cardIten);
-        setCards(newCards);
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? res : c))
+        );
       })
       .catch(error => console.log(`error: ${error}`));
   }
@@ -70,8 +71,7 @@ function App() {
   function handleCardDelete(card) {
     api.deleteCard(card._id)
       .then((res) => {
-        const newCards = cards.filter(item => item._id === card._id ? null : item);
-        setCards(newCards);
+        setCards((state) => state.filter((c) => c._id !== card._id));
       })
       .catch(error => console.log(`error: ${error}`));
   }
@@ -93,7 +93,7 @@ function App() {
       })
       .catch(error => console.log(`error: ${error}`));
   }
-  
+
   function handleAddPlaceSubmit(data) {
     api.addCard(data)
       .then(res => {
