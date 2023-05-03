@@ -28,20 +28,13 @@ class Api {
             .then(this._checkErrors)
     }
 
-    setLike(id) {
+    changeLikeCardStatus(id, isLiked) {
         return fetch(this._url + `/cards/${id}/likes`, {
-            method: 'PUT',
+            method: isLiked ? 'DELETE' : 'PUT',
             headers: this._headers
-        }).then(this._checkErrors);
+        })
+            .then(this._checkErrors)
     }
-
-    deleteLike(id) {
-        return fetch(this._url + `/cards/${id}/likes`, {
-            method: 'DELETE',
-            headers: this._headers
-        }).then(this._checkErrors)
-    }
-
     addCard(data) {
         return fetch(this._url + '/cards', {
             method: 'POST',
@@ -66,7 +59,7 @@ class Api {
             headers: this._headers,
             body: JSON.stringify({
                 name: data.name,
-                about: data.description
+                about: data.about
             })
         })
             .then(this._checkErrors)

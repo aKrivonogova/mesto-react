@@ -1,47 +1,28 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import api from '../utils/api'
 import Card from './Card'
-function Main({ handleEditAvatarClick, handleAddPlaceClick, handleEditProfileClick, onCardClick }) {
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    api.getUserInfo()
-      .then((res) => {
-        setUserName(res.name);
-        setUserAvatar(res.avatar);
-        setUserDescription(res.about);
-      })
-      .catch((error) => console.log(error));
-
-    api.getInitialCards()
-      .then((res) => {
-        setCards(res)
-      })
-      .catch((error) => console.log(error))
-  },[])
-
+import CurrentUserContext from '../contexts/CurrentUserContext'
+function Main({ handleEditAvatarClick, handleAddPlaceClick, handleEditProfileClick, onCardClick, cards, onCardLike, onCardDelete }) {
+  const currentUser = useContext(CurrentUserContext)
   return (
     <main className="main">
       <section className="profile">
         <div className="profile__avatar-container">
           <div className="profile__avatar-content">
-            <img className="profile__avatar" src={userAvatar}
+            <img className="profile__avatar" src={currentUser.avatar}
               alt="картинка аватар профиля" />
             <button className="profile__avatar-edit-button" onClick={handleEditAvatarClick}></button>
           </div>
           <div className="profile__info">
             <div className="profile__head">
               <h1 className="profile__name">
-                {userName}
+                {currentUser.name}
               </h1>
               <button type="button" className="profile__edit-button"
                 aria-label="Редактировать профиль" onClick={handleEditProfileClick}></button>
             </div>
             <p className="profile__description">
-              {userDescription}
+              {currentUser.about}
             </p>
           </div>
         </div>
@@ -56,6 +37,8 @@ function Main({ handleEditAvatarClick, handleAddPlaceClick, handleEditProfileCli
                 card={card}
                 key={card._id}
                 onCardClick={onCardClick}
+                onCardLike={onCardLike}
+                onCardDelete={onCardDelete}
               />
             ))
           }
